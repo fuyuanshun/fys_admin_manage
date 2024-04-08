@@ -4,8 +4,7 @@ import axios from 'axios'
 import useUserStore from '@/store/modules/useUserStore.js'
 
 const request = axios.create({
-    baseURL: 'http://localhost',
-    // baseURL: 'http://www.fysfys.site',
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 5000
 })
 
