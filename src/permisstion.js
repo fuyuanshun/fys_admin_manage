@@ -9,10 +9,10 @@ router.beforeEach((to, from, next)=>{
     let token = store.token;
     //未登录状态
     if(token === ''){
-        if(to.path === '/login'){
+        if(to.path === '/login' || to.path === '/admin/login' || to.path === '/index'){
             next();
         } else {
-            next({path:'/login', query:{redirect: to.path}})
+            next({path:'/index', query:{redirect: to.path}})
         }
     //登录状态
     } else{

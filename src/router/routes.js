@@ -3,15 +3,43 @@ import NotFound from '@/components/404/NotFound.vue'
 import Layout from '@/components/layout/Layout.vue'
 import Screen from '@/components/screen/Screen.vue'
 import Home from '@/components/home/Home.vue'
+import UserLogin from '@/components/login/UserLogin.vue'
 
 //路由常量
 export const constantRoute = [
     {
-        path:'/login',
+        path: '/index',
+        component: ()=> import('@/components/office.vue'),
+        name: 'index',
+        meta:{
+            title:'官网',
+            hidden:true
+        }
+    },
+    {
+        path: '/login',
+        component: UserLogin,
+        name: 'userLogin',
+        meta:{
+            title:'登录',
+            hidden:true
+        }
+    },
+    {
+        path: '/note/index',
+        component: ()=> import('@/components/note/index.vue'),
+        name: 'note-index',
+        meta:{
+            title:'笔记主页',
+            hidden:true
+        }
+    },
+    {
+        path:'/admin/login',
         component:Login,
         name:'login',
         meta:{
-            title:'登录',
+            title:'管理员登录',
             hidden:true
         }
     },
@@ -23,7 +51,7 @@ export const constantRoute = [
             title:'主页',
             icon: 'House'
         },
-        redirect: '/home',
+        redirect: '/note/index',
         children:[
             {
                 path:'/home',

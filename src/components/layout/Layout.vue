@@ -13,7 +13,7 @@
         </div>
         <!-- 顶部菜单 -->
         <div class="layout_topbar" :class="layoutSettingStore.fold?'fold':''">
-            <Topbar></Topbar>
+            <Topbar exitUrl="/admin/login"></Topbar>
         </div>
         <!-- 内容 -->
         <div class="layout_main" :class="layoutSettingStore.fold?'fold':''">

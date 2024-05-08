@@ -50,11 +50,15 @@ import useUserStore from '@/store/modules/useUserStore.js'
 import { useRoute, useRouter } from 'vue-router'
 // 
 import { ElMessageBox } from 'element-plus'
+import {defineProps} from 'vue'
 
 let store = useLayoutSettingStore();
 let userStore = useUserStore();
 let $route = useRoute();
 let $router = useRouter();
+
+
+let {exitUrl} = defineProps(['exitUrl']);
 
 let fullScreen = () => {
     let isFullScreen = document.fullscreenElement;
@@ -78,7 +82,7 @@ let logout = () => {
         //清空store的token
         userStore.clearnToken();
         //跳转到登录页面
-        $router.push("/login")
+        $router.push(exitUrl)
     }).catch(() => {
     })
 }
