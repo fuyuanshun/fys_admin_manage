@@ -12,12 +12,25 @@ router.beforeEach((to, from, next)=>{
         if(to.path === '/login' || to.path === '/admin/login' || to.path === '/index'){
             next();
         } else {
-            next({path:'/index', query:{redirect: to.path}})
+            next({path:'/login', query:{redirect: to.path}})
         }
     //登录状态
     } else{
         if(to.path !== '/login'){
-            next();
+            if(to.path === '/home'){
+                let role = store.role;
+                //判断权限
+                for(let r of role.split(",")){
+                    if(r === 'ROLE_ADMIN'){
+                        next();
+                        return;
+                    }
+                }
+                //循环结束表示没有对应的权限
+                next({path: from.path})
+            } else {
+                next();
+            }
         } else {
             next({path: from.path})
         }

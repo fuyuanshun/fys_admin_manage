@@ -40,7 +40,7 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue'
 import { reqgetUserList, reqDisableUser, reqEnableUser } from '@/api/user/index.js'
-import { ElNotification, notificationEmits } from 'element-plus';
+import { ElNotification } from 'element-plus';
 
 let userDataList = reactive({ userDataList: [] });
 //当前页，默认第一页

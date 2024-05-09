@@ -32,6 +32,7 @@ export default defineStore('useUserStore', {
                 let data = resp.data
                 this.username = data.username
                 this.avatar = data.avatar
+                this.role = data.role
             } else {
                 if(resp){
                     return Promise.reject(new Error(resp.msg))
@@ -52,7 +53,8 @@ export default defineStore('useUserStore', {
             token : Cookies.get('token') || '',
             username: '',
             avatar: '',
-            menuList: constantRoute
+            menuList: constantRoute,
+            role: ''
         }
     },
     getters:{
