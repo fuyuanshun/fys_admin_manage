@@ -19,7 +19,7 @@
             <el-button icon="FullScreen" size="small" circle @click="fullScreen()" />
             <el-button icon="Setting" size="small" circle />
 
-            <img :src="userStore.avatar" circle style="width:24px; height:24px; margin:0px 12px; border-radius:50%;">
+            <img :src="userStore.avatar" circle style="width:24px; height:24px; margin:0px 12px; border-radius:50%;" alt="">
             <!-- 下拉菜单 -->
             <el-dropdown>
                 <span class="el-dropdown-link">

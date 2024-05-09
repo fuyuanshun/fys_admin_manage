@@ -1,10 +1,17 @@
 <template>
-    <div class="login-container">
+    <div class="login-container bgi_default" id="login-container">
         <div class="login">
             <el-form  :model="dataForm" class="login-form" :rules="rules" ref="loginForm">
-                <input type="text" placeholder="请输入账号" v-model="dataForm.account">
-                <input type="password" placeholder="请输入密码" v-model="dataForm.password">
-                <button @click="this_login">登录</button>
+                <el-form-item prop="account">
+                    <el-input type="text" placeholder="请输入账号" v-model="dataForm.account" class="input"/>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input type="password" placeholder="请输入密码" v-model="dataForm.password" @focus="change_bg" @focusout="change_bg" class="input" show-password/>
+                </el-form-item>
+                <el-button @click="this_login">登录</el-button>
+                <div class="black">
+
+                </div>
             </el-form>
         </div>
         <!-- <div class="register">
@@ -41,12 +48,31 @@
     function this_login(){
         login(loginForm, "/note/index", dataForm, loading, $route)
     }
+
+    function change_bg(){
+        let el = document.getElementById("login-container");
+        if(el.classList.contains("bgi_default")){
+            el.classList.remove("bgi_default");
+            el.classList.add("bgi_01");
+        } else {
+            el.classList.remove("bgi_01");
+            el.classList.add("bgi_default");
+        }
+        
+    }
 </script>
 <style scoped lang='scss'>
+    .bgi_default {
+        background-image: url('@/assets/img/userlogin_bg.jpg');
+    }
+    .bgi_01 {
+        background-color: black;
+        // background-image: url('@/assets/img/eays.jpg');
+        // background-repeat: no-repeat;
+        // background-size: cover;
+    }
     .login-container {
         height: 100vh;
-        background-image: url('@/assets/img/userlogin_bg.jpg');
-        // background-image: linear-gradient(45deg, skyblue, rgb(71, 109, 124),rgb(61, 61, 156), rgb(54, 97, 114));
         background-size: cover;
         display: flex;
         justify-content: center;
@@ -57,31 +83,21 @@
             height: 200px;
             border: 1px solid white;
             box-shadow: 0px 0px 1px skyblue;
-
+            border-radius: 25px;
+            overflow: hidden;
             
             .login-form {
-                height: 100%;
+                height: 200px;
+                width: 400px;
                 display:  flex;
                 flex-direction: column;
-                // background-color: skyblue;
-                background-image: linear-gradient(to right bottom, rgb(135, 206, 235, 0.5), rgba(69, 168, 207, 0.5), rgba(10, 98, 133, 0.5));
-                
+                background-color: antiquewhite;
                 justify-content: center;
                 align-items: center;
             }
 
-            input {
-                width: 80%;
-                height: 20px;
-                margin-bottom: 10px;
-            }
-
-            button {
-                color: white;
-                width: 40%;
-                height: 25px;
-                vertical-align: center;
-                background-color: rgb(62, 209, 235, 0.8);
+            .input {
+                width: 214px;
             }
         }
     }

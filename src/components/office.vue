@@ -48,7 +48,7 @@
     // 主内容区
     .content {
         height: 1000px;
-        background-image: url('@/assets/img/bg03.jpg');
+        background-image: url('@/assets/img/bg01.jpg');
         margin: 50px auto;
     }
 
