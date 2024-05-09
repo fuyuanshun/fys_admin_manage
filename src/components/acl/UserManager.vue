@@ -9,8 +9,8 @@
                 <el-table-column prop="enableStr" label="是否可用" align="center" />
                 <el-table-column label="操作" align="center">
                     <template #="{ row }">
-                        <el-button :disabled="row.enable === 1" type="primary" @click="enableUser(row.id)">启用</el-button>
-                        <el-button :disabled="row.enable === 0" type="primary" @click="disableUser(row.id)">禁用</el-button>
+                        <el-button :disabled="row.enable === 1" type="primary" @click="enableUser(row.id, currentPage, pageSize)">启用</el-button>
+                        <el-button :disabled="row.enable === 0" type="primary" @click="disableUser(row.id, currentPage, pageSize)">禁用</el-button>
                         <el-button type="success" @click="showDialog(row)">编辑</el-button>
                     </template>
                 </el-table-column>
@@ -40,13 +40,14 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue'
 import { reqgetUserList, reqDisableUser, reqEnableUser } from '@/api/user/index.js'
+import { ElNotification, notificationEmits } from 'element-plus';
 
 let userDataList = reactive({ userDataList: [] });
 //当前页，默认第一页
 let currentPage = ref(1)
 let totalPage = ref(1)
 //每页的数据量，默认2
-let pageSize = ref(2)
+let pageSize = ref(10)
 //总数据量
 let total = ref(0)
 
@@ -78,15 +79,27 @@ const getUserList = async (v1, v2) => {
 }
 
 //请求启用用户
-const enableUser = async (id) => {
+const enableUser = async (id, currentPage, pageSize) => {
     let res = await reqEnableUser(id)
-    console.log(res)
+    if(res.code === 200){
+        ElNotification({
+            type: 'success',
+            message: '启用成功'
+        });
+        getUserList(currentPage, pageSize);
+    }
 }
 
 //请求禁用用户
-const disableUser = async (id) => {
+const disableUser = async (id, currentPage, pageSize) => {
     let res = await reqDisableUser(id)
-    console.log(res)
+    if(res.code === 200){
+        ElNotification({
+            type: 'success',
+            message: '禁用成功'
+        });
+        getUserList(currentPage, pageSize);
+    }
 }
 
 //监听当前页变动事件
